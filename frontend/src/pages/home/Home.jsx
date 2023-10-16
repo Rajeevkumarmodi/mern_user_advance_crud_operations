@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SearchBox from "../../components/search/SearchBox";
 import { BiPlus } from "react-icons/bi";
 import Table from "../../components/table/Table.jsx";
 import { Link } from "react-router-dom";
+import Loader from "../../components/loader/Loader";
 
 function Home() {
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => setIsLoading(false), 500);
+  }, []);
   return (
     <div className=" px-[30px] md:px-[80px] ">
       <div className=" md:flex md:justify-between py-10">
@@ -67,7 +72,8 @@ function Home() {
           </div>
         </div>
       </div>
-      <Table />
+      {/* show loader */}
+      {isLoading ? <Loader /> : <Table />}
     </div>
   );
 }

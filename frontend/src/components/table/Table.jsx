@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import img from "../../assets/avatar_png.png";
 import Actions from "../actions/Actions";
 
 export default function App() {
-  // const [isShowAction, setIsShowAction] = useState(false);
   return (
     <div className="flex flex-col mt-5 shadow-lg shadow-gray-400 rounded-lg">
       <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
