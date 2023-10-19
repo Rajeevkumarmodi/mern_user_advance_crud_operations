@@ -40,6 +40,17 @@ const userRegistration = async (req, res) => {
 
 // show all users
 
+const showAllUsers = async (req, res) => {
+  try {
+    const allUsers = await User.find();
+    res.status(200).json(allUsers);
+  } catch (error) {
+    res.status(400).json(error);
+    console.log(error);
+  }
+};
+
 module.exports = {
   userRegistration,
+  showAllUsers,
 };

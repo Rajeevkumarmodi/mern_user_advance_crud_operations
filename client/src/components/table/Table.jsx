@@ -3,7 +3,9 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import img from "../../assets/avatar_png.png";
 import Actions from "../actions/Actions";
 
-export default function App() {
+import { BASE_URL } from "../../api/Api";
+
+export default function App({ allUsers }) {
   return (
     <div className="flex flex-col mt-5 shadow-lg shadow-gray-400 rounded-lg">
       <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -36,36 +38,49 @@ export default function App() {
                 </tr>
               </thead>
               <tbody>
-                <tr className="border-b dark:border-neutral-500">
-                  <td className="whitespace-nowrap px-6 py-4 font-medium">1</td>
-                  <td className="whitespace-nowrap px-6 py-4">Rajeev kumar</td>
-                  <td className="whitespace-nowrap px-6 py-4">
-                    rm443283@gmail.com
-                  </td>
-                  <td className="whitespace-nowrap px-6 py-4">Male</td>
-                  <td className="whitespace-nowrap px-6 py-4">Active</td>
-                  <td className="whitespace-nowrap px-6 py-4">
-                    <img className="h-[50px] w-[50px]" src={img} alt="" />
-                  </td>
-                  <td className="whitespace-nowrap px-6 py-4 text-xl cursor-pointer relative">
-                    <Actions />
-                  </td>
-                </tr>
-                <tr className="border-b dark:border-neutral-500">
-                  <td className="whitespace-nowrap px-6 py-4 font-medium">1</td>
-                  <td className="whitespace-nowrap px-6 py-4">Rajeev kumar</td>
-                  <td className="whitespace-nowrap px-6 py-4">
-                    rm443283@gmail.com
-                  </td>
-                  <td className="whitespace-nowrap px-6 py-4">Male</td>
-                  <td className="whitespace-nowrap px-6 py-4">Active</td>
-                  <td className="whitespace-nowrap px-6 py-4">
-                    <img className="h-[50px] w-[50px]" src={img} alt="" />
-                  </td>
-                  <td className="whitespace-nowrap px-6 py-4 text-xl cursor-pointer relative">
-                    <Actions />
-                  </td>
-                </tr>
+                {allUsers &&
+                  allUsers.map((user, index) => {
+                    return (
+                      <tr
+                        key={user._id}
+                        className="border-b dark:border-neutral-500"
+                      >
+                        <td className="whitespace-nowrap px-6 py-4 font-medium">
+                          {index + 1}
+                        </td>
+                        <td className="whitespace-nowrap px-6 py-4">
+                          {`${user.fName}  ${user.lName}`}
+                        </td>
+                        <td className="whitespace-nowrap px-6 py-4">
+                          {user.email}
+                        </td>
+                        <td className="whitespace-nowrap px-6 py-4">
+                          {user.gender}
+                        </td>
+                        <td className="whitespace-nowrap px-6 py-4">
+                          <p
+                            className={`${
+                              user.gender === "Active"
+                                ? "bg-blue-600"
+                                : "bg-red-600"
+                            } px-1 rounded-lg py-1 text-center text-white font-bold`}
+                          >
+                            {user.status}
+                          </p>
+                        </td>
+                        <td className="whitespace-nowrap px-6 py-4">
+                          <img
+                            className="h-[50px] w-[50px]"
+                            src={`${BASE_URL}/uploadImage/${user.image}`}
+                            alt=""
+                          />
+                        </td>
+                        <td className="whitespace-nowrap px-6 py-4 text-xl cursor-pointer relative">
+                          <Actions />
+                        </td>
+                      </tr>
+                    );
+                  })}
               </tbody>
             </table>
           </div>

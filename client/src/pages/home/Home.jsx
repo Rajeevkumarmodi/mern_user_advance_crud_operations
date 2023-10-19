@@ -5,11 +5,24 @@ import Table from "../../components/table/Table.jsx";
 import { Link } from "react-router-dom";
 import Loader from "../../components/loader/Loader";
 
+import { getAllUserSData } from "../../api/Api";
+
 function Home() {
   const [isLoading, setIsLoading] = useState(true);
+  const [allUsers, setAllUsers] = useState([]);
+
   useEffect(() => {
+    getData();
     setTimeout(() => setIsLoading(false), 500);
   }, []);
+
+  // get all users data
+
+  async function getData() {
+    const data = await getAllUserSData();
+    setAllUsers(data.data);
+  }
+
   return (
     <div className=" px-[30px] md:px-[80px] ">
       <div className=" md:flex md:justify-between py-10">
@@ -73,7 +86,7 @@ function Home() {
         </div>
       </div>
       {/* show loader */}
-      {isLoading ? <Loader /> : <Table />}
+      {isLoading ? <Loader /> : <Table allUsers={allUsers} />}
     </div>
   );
 }
