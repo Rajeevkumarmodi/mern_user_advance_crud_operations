@@ -52,6 +52,7 @@ const showAllUsers = async (req, res) => {
   }
 };
 
+// get single user
 const getSingleUser = async (req, res) => {
   const { id } = req.params;
   try {
@@ -66,8 +67,27 @@ const getSingleUser = async (req, res) => {
   }
 };
 
+// delete user
+const deleteUser = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const user = User.findOne({ _id: id });
+    if (!user) {
+      res.status(400).json({ error: "User not found" });
+    } else {
+      const deleteUser = await User.deleteOne({ _id: id });
+
+      res.status(200).json(deleteUser);
+    }
+  } catch (error) {
+    res.status(500).json({ error: "internal server error" });
+  }
+};
+
 module.exports = {
   userRegistration,
   showAllUsers,
   getSingleUser,
+  deleteUser,
 };

@@ -5,7 +5,7 @@ import Actions from "../actions/Actions";
 
 import { BASE_URL } from "../../api/Api";
 
-export default function App({ allUsers }) {
+export default function App({ allUsersData }) {
   return (
     <div className="flex flex-col mt-5 shadow-lg shadow-gray-400 rounded-lg">
       <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -38,8 +38,8 @@ export default function App({ allUsers }) {
                 </tr>
               </thead>
               <tbody>
-                {allUsers &&
-                  allUsers.map((user, index) => {
+                {allUsersData &&
+                  allUsersData.map((user, index) => {
                     return (
                       <tr
                         key={user._id}

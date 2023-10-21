@@ -5,11 +5,12 @@ import Table from "../../components/table/Table.jsx";
 import { Link } from "react-router-dom";
 import Loader from "../../components/loader/Loader";
 import toast, { Toaster } from "react-hot-toast";
-import { getAllUserSData } from "../../api/Api";
+import { getAllUsersData } from "../../api/Api";
+import { contex } from "../../contex/MyContex";
 
 function Home() {
+  const { allUsersData, setAllUsersData } = useContext(contex);
   const [isLoading, setIsLoading] = useState(true);
-  const [allUsers, setAllUsers] = useState([]);
 
   useEffect(() => {
     getData();
@@ -19,8 +20,8 @@ function Home() {
   // get all users data
 
   async function getData() {
-    const data = await getAllUserSData();
-    setAllUsers(data.data);
+    const data = await getAllUsersData();
+    setAllUsersData(data.data);
     console.log(data);
   }
 
@@ -87,7 +88,7 @@ function Home() {
         </div>
       </div>
       {/* show loader */}
-      {isLoading ? <Loader /> : <Table allUsers={allUsers} />}
+      {isLoading ? <Loader /> : <Table allUsersData={allUsersData} />}
       <Toaster />
     </div>
   );
