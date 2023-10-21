@@ -60,7 +60,7 @@ export default function App({ allUsers }) {
                         <td className="whitespace-nowrap px-6 py-4">
                           <p
                             className={`${
-                              user.gender === "Active"
+                              user.status === "Active"
                                 ? "bg-blue-600"
                                 : "bg-red-600"
                             } px-1 rounded-lg py-1 text-center text-white font-bold`}

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import SearchBox from "../../components/search/SearchBox";
 import { BiPlus } from "react-icons/bi";
 import Table from "../../components/table/Table.jsx";
 import { Link } from "react-router-dom";
 import Loader from "../../components/loader/Loader";
-
+import toast, { Toaster } from "react-hot-toast";
 import { getAllUserSData } from "../../api/Api";
 
 function Home() {
@@ -21,6 +21,7 @@ function Home() {
   async function getData() {
     const data = await getAllUserSData();
     setAllUsers(data.data);
+    console.log(data);
   }
 
   return (
@@ -87,6 +88,7 @@ function Home() {
       </div>
       {/* show loader */}
       {isLoading ? <Loader /> : <Table allUsers={allUsers} />}
+      <Toaster />
     </div>
   );
 }
