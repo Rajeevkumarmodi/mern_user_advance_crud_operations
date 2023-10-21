@@ -13,3 +13,8 @@ export const userRegistration = async (data, header) => {
     header
   );
 };
+
+export const getSingleUser = async (id, data, header) => {
+  console.log(id);
+  return await commonRequest("GET", `${BASE_URL}/user/${id}`, data, header);
+};

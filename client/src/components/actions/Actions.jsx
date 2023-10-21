@@ -5,7 +5,7 @@ import { IoMdContact } from "react-icons/io";
 import { AiTwotoneDelete } from "react-icons/ai";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
-function Actions() {
+function Actions({ id }) {
   return (
     <details className="dropdown relative">
       <summary className="m-1 btn">Actions</summary>
@@ -18,7 +18,7 @@ function Actions() {
           <p>Edit</p>
         </Link>
         <Link
-          to="/profile"
+          to={`/profile/${id}`}
           className="flex items-center gap-3 text-xl text-green-600"
         >
           <IoMdContact />

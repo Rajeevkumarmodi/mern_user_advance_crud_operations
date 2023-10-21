@@ -76,7 +76,7 @@ export default function App({ allUsers }) {
                           />
                         </td>
                         <td className="whitespace-nowrap px-6 py-4 text-xl cursor-pointer relative">
-                          <Actions />
+                          <Actions id={user._id} />
                         </td>
                       </tr>
                     );
