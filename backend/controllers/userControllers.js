@@ -52,7 +52,22 @@ const showAllUsers = async (req, res) => {
   }
 };
 
+const getSingleUser = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const user = await User.findOne({ _id: id });
+    if (!user) {
+      res.status(400).json({ error: "User not found" });
+    } else {
+      res.status(200).send(user);
+    }
+  } catch (error) {
+    res.status(500).json({ error: "server error" });
+  }
+};
+
 module.exports = {
   userRegistration,
   showAllUsers,
+  getSingleUser,
 };
