@@ -1,10 +1,14 @@
 const express = require("express");
+const path = require("path");
+const fs = require("fs");
 const User = require("../models/userSchema");
 
 const userRegistration = async (req, res) => {
   const { fName, lName, email, mobile, gender, status } = req.body;
-  console.log(req.body);
-  // console.log(req.file);
+  // console.log(req.body);
+  console.log(req.file);
+  const extensionName = path.extname(req.file.path);
+  console.log(extensionName);
   const file = req.file.filename;
 
   if (!fName || !lName || !email || !mobile || !gender || !status || !file) {
@@ -15,6 +19,16 @@ const userRegistration = async (req, res) => {
         res
           .status(400)
           .json({ error: "Email not valid please enter valid email" });
+      }
+      if (
+        extensionName != ".png" ||
+        extensionName != ".jpeg" ||
+        extensionName != ".jpg"
+      ) {
+        console.log("this is error because .pdf not soputed");
+        res
+          .status(400)
+          .json({ error: "Only .png , jpg & jpeg formatted Allpwed" });
       } else {
         const user = await User.findOne({ email: email });
         if (user) {
@@ -35,7 +49,8 @@ const userRegistration = async (req, res) => {
         }
       }
     } catch (error) {
-      console.log(error);
+      res.status(400).json({ error: error });
+      console.log("internal error", error);
     }
   }
 };
@@ -72,10 +87,18 @@ const deleteUser = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const user = User.findOne({ _id: id });
+    const user = await User.findOne({ _id: id });
     if (!user) {
       res.status(400).json({ error: "User not found" });
     } else {
+      const dirName = path.join(__dirname, "../", "uploadImage");
+      fs.unlink(`${dirName}/${user.image}`, (error) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log("file successfully deleted");
+        }
+      });
       const deleteUser = await User.deleteOne({ _id: id });
 
       res.status(200).json(deleteUser);
