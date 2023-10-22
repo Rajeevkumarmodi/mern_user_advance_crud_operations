@@ -16,20 +16,16 @@ const userRegistration = async (req, res) => {
   } else {
     try {
       if (!email.includes("@" && ".")) {
-        res
+        return res
           .status(400)
           .json({ error: "Email not valid please enter valid email" });
       }
+
       if (
-        extensionName != ".png" ||
-        extensionName != ".jpeg" ||
-        extensionName != ".jpg"
+        extensionName === ".png" ||
+        extensionName === ".jpeg" ||
+        extensionName === ".jpg"
       ) {
-        console.log("this is error because .pdf not soputed");
-        res
-          .status(400)
-          .json({ error: "Only .png , jpg & jpeg formatted Allpwed" });
-      } else {
         const user = await User.findOne({ email: email });
         if (user) {
           res.status(400).json({ error: "User Already Exist" });
@@ -47,6 +43,10 @@ const userRegistration = async (req, res) => {
           const adedUser = await userData.save();
           res.status(200).json({ success: userData });
         }
+      } else {
+        return res
+          .status(400)
+          .json({ error: "Only .png , .jpg & .jpeg formatted Allpwed" });
       }
     } catch (error) {
       res.status(400).json({ error: error });

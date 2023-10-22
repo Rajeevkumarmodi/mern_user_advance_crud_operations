@@ -55,7 +55,7 @@ function Home() {
           <h2 className="font-bold">Filter By Gender</h2>
           <div className="flex gap-3">
             <div className="flex gap-1">
-              <input type="radio" name="gender" id="allG" />
+              <input type="radio" name="gender" defaultChecked id="allG" />
               <label htmlFor="allG">All</label>
             </div>
             <div className="flex gap-1">
@@ -75,7 +75,7 @@ function Home() {
           <h2 className="font-bold">Filter By Status</h2>
           <div className="flex gap-3">
             <div className="flex gap-1">
-              <input type="radio" id="all" name="status" />
+              <input type="radio" id="all" defaultChecked name="status" />
               <label htmlFor="all">All</label>
             </div>
             <div className="flex gap-1">
