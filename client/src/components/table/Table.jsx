@@ -37,51 +37,57 @@ export default function App({ allUsersData }) {
                   </th>
                 </tr>
               </thead>
-              <tbody>
-                {allUsersData &&
-                  allUsersData.map((user, index) => {
-                    return (
-                      <tr
-                        key={user._id}
-                        className="border-b dark:border-neutral-500"
-                      >
-                        <td className="whitespace-nowrap px-6 py-4 font-medium">
-                          {index + 1}
-                        </td>
-                        <td className="whitespace-nowrap px-6 py-4">
-                          {`${user.fName}  ${user.lName}`}
-                        </td>
-                        <td className="whitespace-nowrap px-6 py-4">
-                          {user.email}
-                        </td>
-                        <td className="whitespace-nowrap px-6 py-4">
-                          {user.gender}
-                        </td>
-                        <td className="whitespace-nowrap px-6 py-4">
-                          <p
-                            className={`${
-                              user.status === "Active"
-                                ? "bg-blue-600"
-                                : "bg-red-600"
-                            } px-1 rounded-lg py-1 text-center text-white font-bold`}
-                          >
-                            {user.status}
-                          </p>
-                        </td>
-                        <td className="whitespace-nowrap px-6 py-4">
-                          <img
-                            className="h-[50px] w-[50px]"
-                            src={`${BASE_URL}/uploadImage/${user.image}`}
-                            alt=""
-                          />
-                        </td>
-                        <td className="whitespace-nowrap px-6 py-4 text-xl cursor-pointer relative">
-                          <Actions id={user._id} />
-                        </td>
-                      </tr>
-                    );
-                  })}
-              </tbody>
+              {allUsersData.length < 1 ? (
+                <h2 className="text-center my-2 text-xl">
+                  Users data not found 😒
+                </h2>
+              ) : (
+                <tbody>
+                  {allUsersData &&
+                    allUsersData.map((user, index) => {
+                      return (
+                        <tr
+                          key={user._id}
+                          className="border-b dark:border-neutral-500"
+                        >
+                          <td className="whitespace-nowrap px-6 py-4 font-medium">
+                            {index + 1}
+                          </td>
+                          <td className="whitespace-nowrap px-6 py-4">
+                            {`${user.fName}  ${user.lName}`}
+                          </td>
+                          <td className="whitespace-nowrap px-6 py-4">
+                            {user.email}
+                          </td>
+                          <td className="whitespace-nowrap px-6 py-4">
+                            {user.gender}
+                          </td>
+                          <td className="whitespace-nowrap px-6 py-4">
+                            <p
+                              className={`${
+                                user.status === "Active"
+                                  ? "bg-blue-600"
+                                  : "bg-red-600"
+                              } px-1 rounded-lg py-1 text-center text-white font-bold`}
+                            >
+                              {user.status}
+                            </p>
+                          </td>
+                          <td className="whitespace-nowrap px-6 py-4">
+                            <img
+                              className="h-[50px] w-[50px]"
+                              src={`${BASE_URL}/uploadImage/${user.image}`}
+                              alt=""
+                            />
+                          </td>
+                          <td className="whitespace-nowrap px-6 py-4 text-xl cursor-pointer relative">
+                            <Actions id={user._id} />
+                          </td>
+                        </tr>
+                      );
+                    })}
+                </tbody>
+              )}
             </table>
           </div>
         </div>

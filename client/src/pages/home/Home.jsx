@@ -68,7 +68,9 @@ function Home() {
             </div>
           </div>
         </div>
+
         {/* filter by status */}
+
         <div>
           <h2 className="font-bold">Filter By Status</h2>
           <div className="flex gap-3">

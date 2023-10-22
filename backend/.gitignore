@@ -1,3 +1,7 @@
+*.log
+*.png
+*.jpg
+*.jpeg
 .env
 node_modules
 uploadImage

@@ -71,7 +71,8 @@ function Registration() {
           toast.success("User successfully registerd");
           navigate("/");
         } else {
-          // console.log(responceData.response.data.error);
+          console.log(responceData);
+          console.log(responceData.response.data.error);
           toast.error(responceData.response.data.error);
         }
       }

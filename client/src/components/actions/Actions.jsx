@@ -26,14 +26,14 @@ function Actions({ id }) {
       <summary className="m-1 btn">Actions</summary>
       <ul className="absolute -right-20 -top-10 p-2 bg-white shadow menu dropdown-content z-50 bg-base-100 rounded-box w-40">
         <Link
-          to="/update"
+          to={`/update/${id}`}
           className="flex items-center gap-3 text-xl text-blue-600"
         >
           <BiEdit />
           <p>Edit</p>
         </Link>
         <Link
-          to={`/profile/${id}`}
+          to={`/user/${id}`}
           className="flex items-center gap-3 text-xl text-green-600"
         >
           <IoMdContact />

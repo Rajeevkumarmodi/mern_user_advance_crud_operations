@@ -18,12 +18,7 @@ export const userRegistration = async (data, header) => {
 
 // get single user
 export const getSingleUser = async (id, data, header) => {
-  return await commonRequest(
-    "GET",
-    `${BASE_URL}/user/profile/${id}`,
-    data,
-    header
-  );
+  return await commonRequest("GET", `${BASE_URL}/user/${id}`, data, header);
 };
 
 // delete single user

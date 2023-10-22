@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import Input from "../../components/input/Input";
 import img from "../../assets/avatar_png.png";
 import Loader from "../../components/loader/Loader";
+import { getSingleUser } from "../../api/Api";
+import { useParams } from "react-router-dom";
 
 function Registration() {
+  const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [gender, setGender] = useState("");
   const [image, setImage] = useState("");
@@ -17,13 +20,21 @@ function Registration() {
 
   useEffect(() => {
     setTimeout(() => setIsLoading(false), 500);
-  }, []);
+    getUser();
+  }, [id]);
 
   // handler function
   const changeHandler = (e) => {
     const { name, value } = e.target;
     setInputTextValue({ ...inputTextValue, [name]: value });
   };
+
+  // get user data
+
+  async function getUser() {
+    const data = await getSingleUser(id);
+    console.log(data);
+  }
 
   // submit form
   const submitData = (e) => {
