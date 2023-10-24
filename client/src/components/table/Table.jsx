@@ -38,9 +38,9 @@ export default function App({ allUsersData }) {
                 </tr>
               </thead>
               {allUsersData.length < 1 ? (
-                <h2 className="text-center my-2 text-xl">
+                <div className="text-center my-2 text-xl">
                   Users data not found 😒
-                </h2>
+                </div>
               ) : (
                 <tbody>
                   {allUsersData &&

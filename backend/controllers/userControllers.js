@@ -57,7 +57,7 @@ const userRegistration = async (req, res) => {
 // show all users
 
 const showAllUsers = async (req, res) => {
-  console.log(req.query);
+  const searchStatus = req.query.status;
   const searchGender = req.query.gender;
   const searchText = req.query.search || "";
 
@@ -78,6 +78,7 @@ const showAllUsers = async (req, res) => {
 
   // search by gender
   searchGender != "All" ? (query.gender = searchGender) : "";
+  searchStatus != "All" ? (query.status = searchStatus) : "";
 
   try {
     const allUsers = await User.find(query);

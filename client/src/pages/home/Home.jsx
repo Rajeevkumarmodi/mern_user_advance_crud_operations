@@ -12,18 +12,23 @@ function Home() {
   const { allUsersData, setAllUsersData, searchText } = useContext(contex);
   const [isLoading, setIsLoading] = useState(true);
   const [searchGender, setSearchGender] = useState("All");
+  const [searchStatus, setSearchStatus] = useState("All");
 
   useEffect(() => {
     getData();
     setTimeout(() => setIsLoading(false), 500);
-  }, [searchText, searchGender]);
+  }, [searchText, searchGender, searchStatus]);
 
   // get all users data
 
   async function getData() {
-    const data = await getAllUsersData(searchText, searchGender);
-    setAllUsersData(data.data);
-    console.log(data);
+    // console.log(await getAllUsersData(searchText, searchStatus));
+    const allData = await getAllUsersData(
+      searchText,
+      searchGender,
+      searchStatus
+    );
+    setAllUsersData(allData.data);
   }
 
   return (
@@ -91,15 +96,31 @@ function Home() {
           <h2 className="font-bold">Filter By Status</h2>
           <div className="flex gap-3">
             <div className="flex gap-1">
-              <input type="radio" id="all" defaultChecked name="status" />
+              <input
+                onClick={() => setSearchStatus("All")}
+                type="radio"
+                id="all"
+                defaultChecked
+                name="status"
+              />
               <label htmlFor="all">All</label>
             </div>
             <div className="flex gap-1">
-              <input type="radio" id="active" name="status" />
+              <input
+                onClick={() => setSearchStatus("Active")}
+                type="radio"
+                id="active"
+                name="status"
+              />
               <label htmlFor="active">Active</label>
             </div>
             <div className="flex gap-1">
-              <input type="radio" id="inActive" name="status" />
+              <input
+                onClick={() => setSearchStatus("InActive")}
+                type="radio"
+                id="inActive"
+                name="status"
+              />
               <label htmlFor="inActive">InActive</label>
             </div>
           </div>
