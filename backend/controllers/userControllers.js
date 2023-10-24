@@ -57,8 +57,25 @@ const userRegistration = async (req, res) => {
 // show all users
 
 const showAllUsers = async (req, res) => {
+  const searchText = req.query.search || "";
+
+  // search query
+  const query = {
+    $or: [
+      {
+        fName: { $regex: searchText, $options: "i" },
+      },
+      {
+        lName: { $regex: searchText, $options: "i" },
+      },
+      {
+        email: { $regex: searchText, $options: "i" },
+      },
+    ],
+  };
+
   try {
-    const allUsers = await User.find();
+    const allUsers = await User.find(query);
     res.status(200).json(allUsers);
   } catch (error) {
     res.status(400).json(error);

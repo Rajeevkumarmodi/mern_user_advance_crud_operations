@@ -2,8 +2,13 @@ import { commonRequest } from "./callApi";
 export const BASE_URL = "http://localhost:8000";
 
 // get all user
-export const getAllUsersData = async (data, header) => {
-  return await commonRequest("GET", `${BASE_URL}/users`, data, header);
+export const getAllUsersData = async (search, data, header) => {
+  return await commonRequest(
+    "GET",
+    `${BASE_URL}/users?search=${search}`,
+    data,
+    header
+  );
 };
 
 // user registration

@@ -9,18 +9,18 @@ import { getAllUsersData } from "../../api/Api";
 import { contex } from "../../contex/MyContex";
 
 function Home() {
-  const { allUsersData, setAllUsersData } = useContext(contex);
+  const { allUsersData, setAllUsersData, searchText } = useContext(contex);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getData();
     setTimeout(() => setIsLoading(false), 500);
-  }, []);
+  }, [searchText]);
 
   // get all users data
 
   async function getData() {
-    const data = await getAllUsersData();
+    const data = await getAllUsersData(searchText);
     setAllUsersData(data.data);
     console.log(data);
   }
