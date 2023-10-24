@@ -6,9 +6,8 @@ const User = require("../models/userSchema");
 const userRegistration = async (req, res) => {
   const { fName, lName, email, mobile, gender, status } = req.body;
   // console.log(req.body);
-  console.log(req.file);
+  // console.log(req.file);
   const extensionName = path.extname(req.file.path);
-  console.log(extensionName);
   const file = req.file.filename;
 
   if (!fName || !lName || !email || !mobile || !gender || !status || !file) {
@@ -108,9 +107,47 @@ const deleteUser = async (req, res) => {
   }
 };
 
+// update user informations
+
+const updateInfo = async (req, res) => {
+  const { id } = req.params;
+  const { fName, lName, email, mobile, image, gender, status } = req.body;
+  const file = req.file ? req.file.filename : image;
+
+  try {
+    const user = await User.findOne({ _id: id });
+    console.log(user);
+    if (!user) {
+      res.status(404).json({ error: "user not found" });
+    } else {
+      const update = await User.updateOne(
+        { _id: id },
+        {
+          $set: {
+            fName,
+            lName,
+            email,
+            mobile,
+            status,
+            gender,
+            image: file,
+          },
+          $currentDate: { lastUpdated: true },
+        }
+      );
+
+      res.status(200).json({ success: "update details successfully" });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 module.exports = {
   userRegistration,
   showAllUsers,
   getSingleUser,
   deleteUser,
+  updateInfo,
 };
