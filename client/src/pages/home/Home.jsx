@@ -11,16 +11,17 @@ import { contex } from "../../contex/MyContex";
 function Home() {
   const { allUsersData, setAllUsersData, searchText } = useContext(contex);
   const [isLoading, setIsLoading] = useState(true);
+  const [searchGender, setSearchGender] = useState("All");
 
   useEffect(() => {
     getData();
     setTimeout(() => setIsLoading(false), 500);
-  }, [searchText]);
+  }, [searchText, searchGender]);
 
   // get all users data
 
   async function getData() {
-    const data = await getAllUsersData(searchText);
+    const data = await getAllUsersData(searchText, searchGender);
     setAllUsersData(data.data);
     console.log(data);
   }
@@ -49,21 +50,36 @@ function Home() {
             Export to Csv
           </button>
         </div>
-
         {/* gender filter */}
         <div>
           <h2 className="font-bold">Filter By Gender</h2>
           <div className="flex gap-3">
             <div className="flex gap-1">
-              <input type="radio" name="gender" defaultChecked id="allG" />
+              <input
+                onClick={() => setSearchGender("All")}
+                type="radio"
+                name="gender"
+                defaultChecked
+                id="allG"
+              />
               <label htmlFor="allG">All</label>
             </div>
             <div className="flex gap-1">
-              <input type="radio" name="gender" id="male" />
+              <input
+                onClick={() => setSearchGender("Male")}
+                type="radio"
+                name="gender"
+                id="male"
+              />
               <label htmlFor="male">Male</label>
             </div>
             <div className="flex gap-1">
-              <input type="radio" name="gender" id="female" />
+              <input
+                onClick={() => setSearchGender("Female")}
+                type="radio"
+                name="gender"
+                id="female"
+              />
               <label htmlFor="female">Female</label>
             </div>
           </div>
