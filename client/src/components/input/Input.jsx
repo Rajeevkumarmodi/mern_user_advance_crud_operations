@@ -1,6 +1,6 @@
 import React from "react";
 
-function Input({ label, p_holder, type, changeHandler, name }) {
+function Input({ label, p_holder, type, changeHandler, name, value }) {
   return (
     <div>
       <div className=" flex flex-col gap-2">
@@ -11,6 +11,7 @@ function Input({ label, p_holder, type, changeHandler, name }) {
           type={type}
           placeholder={p_holder}
           name={name}
+          value={value}
           onChange={(e) => changeHandler(e)}
         />
       </div>

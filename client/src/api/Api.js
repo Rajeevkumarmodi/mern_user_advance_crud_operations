@@ -30,3 +30,12 @@ export const deleteUser = async (id, data, header) => {
     header
   );
 };
+
+export const updateInfo = async (id, data, header) => {
+  return await commonRequest(
+    "PATCH",
+    `${BASE_URL}/user/detail/${id}`,
+    data,
+    header
+  );
+};
