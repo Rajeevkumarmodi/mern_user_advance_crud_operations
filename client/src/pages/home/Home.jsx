@@ -7,28 +7,41 @@ import Loader from "../../components/loader/Loader";
 import toast, { Toaster } from "react-hot-toast";
 import { getAllUsersData } from "../../api/Api";
 import { contex } from "../../contex/MyContex";
+import Pagination from "../../components/pagination/Pagination";
 
 function Home() {
-  const { allUsersData, setAllUsersData, searchText } = useContext(contex);
+  const {
+    allUsersData,
+    setAllUsersData,
+    searchText,
+    // totalUsers,
+    // setTotalUsers,
+  } = useContext(contex);
   const [isLoading, setIsLoading] = useState(true);
   const [searchGender, setSearchGender] = useState("All");
   const [searchStatus, setSearchStatus] = useState("All");
+  const [totalUsers, setTotalUsers] = useState();
+  const [skip, setSkip] = useState(0);
+  const [limit, setLimit] = useState(3);
 
   useEffect(() => {
     getData();
     setTimeout(() => setIsLoading(false), 500);
-  }, [searchText, searchGender, searchStatus]);
+  }, [searchText, searchGender, searchStatus, skip]);
 
   // get all users data
 
   async function getData() {
-    // console.log(await getAllUsersData(searchText, searchStatus));
     const allData = await getAllUsersData(
       searchText,
       searchGender,
-      searchStatus
+      searchStatus,
+      skip,
+      limit
     );
-    setAllUsersData(allData.data);
+    // console.log(allData);
+    setTotalUsers(allData.data.totalUsers);
+    setAllUsersData(allData.data.allUsers);
   }
 
   return (
@@ -127,7 +140,18 @@ function Home() {
         </div>
       </div>
       {/* show loader */}
-      {isLoading ? <Loader /> : <Table allUsersData={allUsersData} />}
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <Table allUsersData={allUsersData} totalUsers={totalUsers} />
+      )}
+      <Pagination
+        totalUsers={totalUsers}
+        skip={skip}
+        setSkip={setSkip}
+        limit={limit}
+        setLimit={setLimit}
+      />
       <Toaster />
     </div>
   );

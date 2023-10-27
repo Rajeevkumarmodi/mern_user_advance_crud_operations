@@ -4,6 +4,7 @@ import img from "../../assets/avatar_png.png";
 import Actions from "../actions/Actions";
 
 import { BASE_URL } from "../../api/Api";
+import Pagination from "../pagination/Pagination";
 
 export default function App({ allUsersData }) {
   return (
@@ -50,19 +51,19 @@ export default function App({ allUsersData }) {
                           key={user._id}
                           className="border-b dark:border-neutral-500"
                         >
-                          <td className="whitespace-nowrap px-6 py-4 font-medium">
+                          <td className="whitespace-nowrap px-6 py-2 font-medium">
                             {index + 1}
                           </td>
-                          <td className="whitespace-nowrap px-6 py-4">
+                          <td className="whitespace-nowrap px-6 py-2">
                             {`${user.fName}  ${user.lName}`}
                           </td>
-                          <td className="whitespace-nowrap px-6 py-4">
+                          <td className="whitespace-nowrap px-6 py-2">
                             {user.email}
                           </td>
-                          <td className="whitespace-nowrap px-6 py-4">
+                          <td className="whitespace-nowrap px-6 py-2">
                             {user.gender}
                           </td>
-                          <td className="whitespace-nowrap px-6 py-4">
+                          <td className="whitespace-nowrap px-6 py-2">
                             <p
                               className={`${
                                 user.status === "Active"
@@ -73,14 +74,14 @@ export default function App({ allUsersData }) {
                               {user.status}
                             </p>
                           </td>
-                          <td className="whitespace-nowrap px-6 py-4">
+                          <td className="whitespace-nowrap px-6 py-2">
                             <img
                               className="h-[50px] w-[50px]"
                               src={`${BASE_URL}/uploadImage/${user.image}`}
                               alt=""
                             />
                           </td>
-                          <td className="whitespace-nowrap px-6 py-4 text-xl cursor-pointer relative">
+                          <td className="whitespace-nowrap px-6 py-2 text-xl cursor-pointer relative">
                             <Actions id={user._id} />
                           </td>
                         </tr>

@@ -2,10 +2,18 @@ import { commonRequest } from "./callApi";
 export const BASE_URL = "http://localhost:8000";
 
 // get all user
-export const getAllUsersData = async (search, gender, status, data, header) => {
+export const getAllUsersData = async (
+  search,
+  gender,
+  status,
+  skip,
+  limit,
+  data,
+  header
+) => {
   return await commonRequest(
     "GET",
-    `${BASE_URL}/users?search=${search}&gender=${gender}&status=${status}`,
+    `${BASE_URL}/users?search=${search}&gender=${gender}&status=${status}&limit=${limit}&skip=${skip}`,
     data,
     header
   );
