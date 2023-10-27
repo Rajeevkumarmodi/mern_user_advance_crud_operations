@@ -59,6 +59,8 @@ const userRegistration = async (req, res) => {
 const showAllUsers = async (req, res) => {
   const searchStatus = req.query.status;
   const searchGender = req.query.gender;
+  const limit = req.query.limit ? req.query.limit : 3;
+  const skip = req.query.skip ? req.query.skip : 0;
   const searchText = req.query.search || "";
 
   // search query
@@ -81,8 +83,9 @@ const showAllUsers = async (req, res) => {
   searchStatus != "All" ? (query.status = searchStatus) : "";
 
   try {
-    const allUsers = await User.find(query);
-    res.status(200).json(allUsers);
+    const totalUsers = await User.countDocuments({});
+    const allUsers = await User.find(query).limit(limit).skip(skip);
+    res.status(200).json({ allUsers, totalUsers });
   } catch (error) {
     res.status(400).json(error);
     console.log(error);
